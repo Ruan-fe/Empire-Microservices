@@ -4,6 +4,7 @@ import com.empire.authentication.configurations.security.jwt.JwtTokenProvider;
 import com.empire.authentication.domain.entities.User;
 import com.empire.authentication.domain.repositories.UserRepository;
 import com.empire.authentication.rest.models.requests.UserRequest;
+import com.empire.authentication.rest.models.responses.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,11 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.springframework.http.ResponseEntity.ok;
 
 @Service
 public class AuthService {
@@ -28,7 +24,7 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    public ResponseEntity<?> logar(UserRequest userRequest) {
+    public ResponseEntity<AuthResponse> logar(UserRequest userRequest) {
         try {
             String username = userRequest.getUsername();
             String password = userRequest.getPassword();
@@ -45,10 +41,13 @@ public class AuthService {
                 throw new UsernameNotFoundException("Username not found");
             }
 
-            Map<Object, Object> model = new HashMap<>();
-            model.put("username", username);
-            model.put("token", token);
-            return ok(model);
+            AuthResponse authResponse = AuthResponse
+                    .builder()
+                    .username(username)
+                    .token(token)
+                    .build();
+
+            return ResponseEntity.ok(authResponse);
 
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password");
