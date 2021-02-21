@@ -11,7 +11,7 @@ public class UserController {
 
     @GetMapping
     public UserRequest teste() {
-        UserRequest userRequest = new UserRequest("ruan","123");
+        UserRequest userRequest = new UserRequest("ruan", "123");
         return userRequest;
     }
 }

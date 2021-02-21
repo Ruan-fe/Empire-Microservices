@@ -1,13 +1,8 @@
 package com.empire.authentication.rest.models.requests;
 
-import java.io.Serializable;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -19,7 +14,7 @@ public class UserRequest implements Serializable {
 
     private static final long serialVersionUID = -8387927312441830960L;
 
-    private String userName;
+    private String username;
     private String password;
 
 }
