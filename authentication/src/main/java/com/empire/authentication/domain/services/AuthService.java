@@ -31,7 +31,7 @@ public class AuthService {
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
-            User user = userRepository.findByUserName(username);
+            User user = userRepository.findByUsername(username);
 
             String token = "";
 

@@ -27,27 +27,27 @@ public class User implements UserDetails, Serializable {
     private Long id;
 
     @Column(name = "user_name", unique = true)
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "accountNonExpired")
-    private Boolean accountNonExpired;
+    @Column(name = "isAccountNonExpired")
+    private Boolean isAccountNonExpired;
 
-    @Column(name = "accountNonLocked")
-    private Boolean accountNonLocked;
+    @Column(name = "isAccountNonLocked")
+    private Boolean isAccountNonLocked;
 
-    @Column(name = "credentialsNonExpired")
-    private Boolean credentialsNonExpired;
+    @Column(name = "isCredentialsNonExpired")
+    private Boolean isCredentialsNonExpired;
 
-    @Column(name = "enabled")
-    private Boolean enabled;
+    @Column(name = "isEnabled")
+    private Boolean isEnabled;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_permission", joinColumns = {@JoinColumn(name = "id_user")},
-            inverseJoinColumns = {@JoinColumn(name = "id_permissions")})
+    @JoinTable(name = "users_permissions", joinColumns = {@JoinColumn(name = "id_user")},
+            inverseJoinColumns = {@JoinColumn(name = "id_permission")})
     private List<Permission> permissions;
 
 
@@ -67,26 +67,26 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.accountNonExpired;
+        return this.isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.accountNonLocked;
+        return this.isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.credentialsNonExpired;
+        return this.isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return this.enabled;
+        return this.isEnabled;
     }
 }

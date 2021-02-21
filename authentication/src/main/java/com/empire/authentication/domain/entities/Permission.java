@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "permission")
+@Table(name = "permissions")
 @Getter
 @Setter
 @ToString

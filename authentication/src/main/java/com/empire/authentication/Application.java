@@ -43,15 +43,15 @@ public class Application {
 		}
 
 		User admin = new User();
-		admin.setUserName("ruan");
-		admin.setAccountNonExpired(true);
-		admin.setAccountNonLocked(true);
-		admin.setCredentialsNonExpired(true);
-		admin.setEnabled(true);
+		admin.setUsername("ruan");
+		admin.setIsAccountNonExpired(true);
+		admin.setIsAccountNonLocked(true);
+		admin.setIsCredentialsNonExpired(true);
+		admin.setIsEnabled(true);
 		admin.setPassword(passwordEncoder.encode("123456"));
 		admin.setPermissions(Arrays.asList(permission));
 
-		User find = userRepository.findByUserName("ruan");
+		User find = userRepository.findByUsername("ruan");
 		if (find == null) {
 			userRepository.save(admin);
 		}
