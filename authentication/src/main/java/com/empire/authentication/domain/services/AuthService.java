@@ -32,14 +32,7 @@ public class AuthService {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
             User user = userRepository.findByUsername(username);
-
-            String token;
-
-            if (user != null) {
-                token = jwtTokenProvider.createToken(username, user.getRoles());
-            } else {
-                throw new UsernameNotFoundException("Username not found");
-            }
+            String token = jwtTokenProvider.createToken(username, user.getRoles());
 
             AuthResponse authResponse = AuthResponse
                     .builder()
@@ -50,7 +43,7 @@ public class AuthService {
             return ResponseEntity.ok(authResponse);
 
         } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid username/password");
+            throw new BadCredentialsException("Invalid username or password");
         }
     }
 

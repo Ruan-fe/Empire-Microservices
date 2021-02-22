@@ -1,5 +1,6 @@
 package com.empire.authentication.domain.services;
 
+import com.empire.authentication.configurations.exceptions.UsernameAlreadyExistException;
 import com.empire.authentication.domain.entities.User;
 import com.empire.authentication.domain.repositories.PermissionRepository;
 import com.empire.authentication.domain.repositories.UserRepository;
@@ -34,6 +35,11 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public User registerUser(UserRequest userRequest) {
+
+        if (userRepository.existsByUsername(userRequest.getUsername())) {
+            throw new UsernameAlreadyExistException("Username already exist");
+        }
+
         User user = userRequest.convert(permissionRepository);
         return userRepository.save(user);
     }
