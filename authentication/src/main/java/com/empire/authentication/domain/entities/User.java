@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class User implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -9020973236707102285L;
@@ -58,10 +59,8 @@ public class User implements UserDetails, Serializable {
 
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
-        this.permissions.stream()
-                .forEach(p -> {
-                    roles.add(p.getDescription());
-                });
+        this.permissions
+                .forEach(p -> roles.add(p.getDescription()));
         return roles;
     }
 

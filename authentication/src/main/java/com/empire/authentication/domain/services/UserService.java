@@ -1,18 +1,25 @@
 package com.empire.authentication.domain.services;
 
 import com.empire.authentication.domain.entities.User;
+import com.empire.authentication.domain.repositories.PermissionRepository;
 import com.empire.authentication.domain.repositories.UserRepository;
+import com.empire.authentication.rest.models.requests.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PermissionRepository permissionRepository;
 
 
     @Override
@@ -25,4 +32,9 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    @Transactional
+    public User registerUser(UserRequest userRequest) {
+        User user = userRequest.convert(permissionRepository);
+        return userRepository.save(user);
+    }
 }

@@ -20,6 +20,8 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<AuthResponse> login(@RequestBody UserRequest userRequest) {
-        return authService.logar(userRequest);
+        return authService.login(userRequest);
     }
+
+
 }

@@ -24,7 +24,7 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    public ResponseEntity<AuthResponse> logar(UserRequest userRequest) {
+    public ResponseEntity<AuthResponse> login(UserRequest userRequest) {
         try {
             String username = userRequest.getUsername();
             String password = userRequest.getPassword();
@@ -33,7 +33,7 @@ public class AuthService {
 
             User user = userRepository.findByUsername(username);
 
-            String token = "";
+            String token;
 
             if (user != null) {
                 token = jwtTokenProvider.createToken(username, user.getRoles());
