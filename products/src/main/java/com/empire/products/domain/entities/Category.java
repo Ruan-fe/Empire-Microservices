@@ -1,5 +1,6 @@
 package com.empire.products.domain.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +12,13 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "products")
+@Table(name = "categories")
 @Entity
-public class Product {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private Double value;
-    private Long stock;
-    @ManyToOne
-    private Category category;
+
 }
