@@ -23,14 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    private static final String[] PUBLIC_MATCHERS = {
-            "/h2-console/**",
+    private static final String[] PUBLIC_MATCHERS_POST = {
             "/login",
             "/user"
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/h2-console/**",
     };
 
     @Bean
@@ -53,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
-                .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));

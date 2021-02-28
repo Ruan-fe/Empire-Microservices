@@ -23,12 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    private static final String[] PUBLIC_MATCHERS = {
-            "/exemplo/**",
+    private static final String[] PUBLIC_MATCHERS_POST = {
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/exemplo/**",
+            "/api/v1/product",
+            "/api/v1/category"
     };
 
     @Bean
@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
-                .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
