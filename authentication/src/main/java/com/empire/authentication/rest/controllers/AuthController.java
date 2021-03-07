@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("auth/login")
 public class AuthController {
 
     @Autowired

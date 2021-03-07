@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("auth/user")
 public class UserController {
 
     @Autowired
