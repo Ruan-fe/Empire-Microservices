@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  application:
+    name: authentication_service
   jpa:
     show-sql: false
     hibernate:
@@ -17,4 +19,9 @@ security:
     token:
       secret-key: chave_microservices
       expire-length: 360000
-
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/registry/eureka
