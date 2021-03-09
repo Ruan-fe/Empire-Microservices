@@ -1,0 +1,7 @@
+<ehcache>
+    <cache name="getCategoriesCache"
+           maxElementsInMemory="2000"
+           eternal="false"
+           overflowToDisk="false"
+           timeToLiveSeconds="10" />
+</ehcache>
