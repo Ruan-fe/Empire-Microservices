@@ -16,18 +16,13 @@ zuul:
   prefix: /api
   ignored-services: "*"
   routes:
-    products:
-      path: /**
-      service-id: products_service
-      strip-prefix: false
-      custom-sensitive-headers: true
     authentication_service:
       path: /auth/**
       service-id: authentication_service
       strip-prefix: false
       custom-sensitive-headers: true
     sale_service:
-      path: /**
+      path: /sale/**
       service-id: sale_service
       strip-prefix: false
       custom-sensitive-headers: true
