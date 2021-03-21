@@ -1,7 +1,7 @@
-package com.empire.products.domain.services;
+package com.saleservice.domain.services;
 
-import com.empire.products.domain.entities.Product;
-import com.empire.products.domain.repositories.ProductRepository;
+import com.saleservice.domain.entities.Product;
+import com.saleservice.domain.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

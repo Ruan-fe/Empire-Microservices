@@ -1,7 +1,7 @@
-package com.empire.products.rest.models.responses;
+package com.saleservice.rest.models.responses;
 
-import com.empire.products.domain.entities.Category;
-import com.empire.products.domain.entities.Product;
+import com.saleservice.domain.entities.Category;
+import com.saleservice.domain.entities.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,7 @@ public class ProductResponse {
     private Long id;
     private String description;
     private Double value;
-    private Long stock;
+    private Long quantityStock;
     private Category category;
 
 
@@ -22,7 +22,7 @@ public class ProductResponse {
         id = product.getId();
         description = product.getDescription();
         value = product.getValue();
-        stock = product.getStock();
+        quantityStock = product.getQuantityStock();
         category = product.getCategory();
     }
 
