@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("category")
+@RequestMapping("sale/category")
 public class CategoryController {
 
     private final String pathWithId = "/category/{id}";
