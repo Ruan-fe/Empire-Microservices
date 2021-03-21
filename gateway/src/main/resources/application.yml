@@ -26,3 +26,8 @@ zuul:
       service-id: authentication_service
       strip-prefix: false
       custom-sensitive-headers: true
+    sale_service:
+      path: /**
+      service-id: sale_service
+      strip-prefix: false
+      custom-sensitive-headers: true
