@@ -21,7 +21,7 @@ import java.net.URI;
 @RequestMapping("sale/category")
 public class CategoryController {
 
-    private final String pathWithId = "/category/{id}";
+    private final String pathWithId = "sale/category/{id}";
 
     @Autowired
     private CategoryService categoryService;
