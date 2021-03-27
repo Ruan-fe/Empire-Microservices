@@ -42,8 +42,8 @@ public class CategoryController {
         return ResponseEntity.created(uri).body(new CategoryResponse(category));
     }
 
-    @PutMapping
-    public ResponseEntity<CategoryResponse>change(@RequestBody @Valid CategoryChangeRequest categoryChangeRequest, @RequestParam Long id){
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryResponse>change(@RequestBody @Valid CategoryChangeRequest categoryChangeRequest, @PathVariable("id") Long id){
 
         Category category = categoryService.change(categoryChangeRequest, id);
 

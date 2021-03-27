@@ -42,8 +42,8 @@ public class ProductController {
         return ResponseEntity.created(uri).body(new ProductResponse(product));
     }
 
-    @PutMapping
-    public ResponseEntity<ProductResponse>change(@RequestBody ProductChangeRequest productChangeRequest, @RequestParam Long id){
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse>change(@RequestBody ProductChangeRequest productChangeRequest, @PathVariable("id") Long id){
 
        Product product = productService.change(productChangeRequest, id);
 

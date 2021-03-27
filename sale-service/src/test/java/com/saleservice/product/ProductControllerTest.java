@@ -77,7 +77,7 @@ public class ProductControllerTest {
                 .categoryId(1L)
                 .build();
 
-        mockMvcHelper.put(path+"?id=",productId, productChangeRequest)
+        mockMvcHelper.put(path,productId, productChangeRequest)
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("GTX 750 TI"))

@@ -54,7 +54,7 @@ public class MockMvcHelper {
 
     public ResultActions put(String path, Long id, Object request) throws Exception {
         String idConvertido = Objects.isNull(id) ? "" : id.toString();
-        return mockMvc.perform(MockMvcRequestBuilders.put(path + idConvertido)
+        return mockMvc.perform(MockMvcRequestBuilders.put(path +"/"+ idConvertido)
                 .locale(Constantes.PT_BR)
                 .characterEncoding(Constantes.DEFAULT_ENCODING)
                 .contentType(MediaType.APPLICATION_JSON)
