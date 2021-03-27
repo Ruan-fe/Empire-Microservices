@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -33,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponse>save(@RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<ProductResponse>save(@RequestBody @Valid ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder){
 
         Product product = productService.save(productRequest);
 
