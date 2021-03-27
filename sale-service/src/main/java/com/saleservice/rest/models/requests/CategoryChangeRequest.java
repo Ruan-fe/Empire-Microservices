@@ -12,10 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CategoryChangeRequest {
 
-    private Long id;
     private String description;
 
-    public Category convert(){
+    public Category convert(Long id){
         return Category.builder().id(id).description(description).build();
     }
 }

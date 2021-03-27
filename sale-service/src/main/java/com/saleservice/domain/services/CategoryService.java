@@ -26,8 +26,8 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category change(CategoryChangeRequest categoryChangeRequest) {
-        Category category = categoryChangeRequest.convert();
+    public Category change(CategoryChangeRequest categoryChangeRequest, Long id) {
+        Category category = categoryChangeRequest.convert(id);
         return categoryRepository.save(category);
     }
 }

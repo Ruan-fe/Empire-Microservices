@@ -35,10 +35,10 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product change(ProductChangeRequest productChangeRequest) {
+    public Product change(ProductChangeRequest productChangeRequest, Long productId) {
 
         Category category = categoryRepository.findById(productChangeRequest.getCategoryId()).orElseThrow(()-> new RuntimeException());
-        Product product = productChangeRequest.convert(category);
+        Product product = productChangeRequest.convert(category,productId);
         return  productRepository.save(product);
 
     }

@@ -43,9 +43,9 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<ProductResponse>change(@RequestBody ProductChangeRequest productChangeRequest){
+    public ResponseEntity<ProductResponse>change(@RequestBody ProductChangeRequest productChangeRequest, @RequestParam Long id){
 
-       Product product = productService.change(productChangeRequest);
+       Product product = productService.change(productChangeRequest, id);
 
        return ResponseEntity.ok().body(new ProductResponse(product));
 

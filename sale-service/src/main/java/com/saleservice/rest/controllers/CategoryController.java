@@ -43,9 +43,9 @@ public class CategoryController {
     }
 
     @PutMapping
-    public ResponseEntity<CategoryResponse>change(@RequestBody @Valid CategoryChangeRequest categoryChangeRequest){
+    public ResponseEntity<CategoryResponse>change(@RequestBody @Valid CategoryChangeRequest categoryChangeRequest, @RequestParam Long id){
 
-        Category category = categoryService.change(categoryChangeRequest);
+        Category category = categoryService.change(categoryChangeRequest, id);
 
         return ResponseEntity.ok().body(new CategoryResponse(category));
     }
