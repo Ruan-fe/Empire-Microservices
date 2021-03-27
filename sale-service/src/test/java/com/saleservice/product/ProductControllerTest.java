@@ -1,6 +1,7 @@
 package com.saleservice.product;
 
 import com.saleservice.helper.MockMvcHelper;
+import com.saleservice.rest.models.requests.ProductChangeRequest;
 import com.saleservice.rest.models.requests.ProductRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,12 @@ public class ProductControllerTest {
     @Test
     public void shouldReturnCreatedWhenInsertAProduct() throws Exception {
 
-        ProductRequest productRequest = ProductRequest.builder().description("GTX 650 TI").value(450.0).quantityStock(20L).categoryId(1L).build();
+        ProductRequest productRequest = ProductRequest.builder()
+                .description("GTX 650 TI")
+                .value(450.0)
+                .quantityStock(20L)
+                .categoryId(1L)
+                .build();
 
         mockMvcHelper.save(path,productRequest)
                 .andExpect(status().isCreated())
@@ -56,6 +62,27 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("GTX 650 TI"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.value").value(450))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.quantityStock").value(20))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.category.id").value(1));
+    }
+
+    @Test
+    public void shouldReturnOkWhenUpdateAProduct() throws Exception {
+
+        Long productId = 1L;
+
+        ProductChangeRequest productChangeRequest = ProductChangeRequest.builder()
+                .description("GTX 750 TI")
+                .value(980.0)
+                .quantityStock(6L)
+                .categoryId(1L)
+                .build();
+
+        mockMvcHelper.put(path+"?id=",productId, productChangeRequest)
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("GTX 750 TI"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.value").value(980.0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.quantityStock").value(6))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.category.id").value(1));
     }
 
