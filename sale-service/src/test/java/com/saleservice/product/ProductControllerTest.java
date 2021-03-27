@@ -86,7 +86,93 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.category.id").value(1));
     }
 
+    @Test
+    public void shouldReturnBadRequestWhenInsertAProductAndCategoryNoExist() throws Exception {
 
+        ProductRequest productRequest = ProductRequest.builder()
+                .description("GTX 650 TI")
+                .value(450.0)
+                .quantityStock(20L)
+                .categoryId(9999999999999L)
+                .build();
+
+        mockMvcHelper.save(path,productRequest)
+                .andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Category not found!"));
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenInsertAProductAndDescriptionIsNull() throws Exception {
+
+        ProductRequest productRequest = ProductRequest.builder()
+                .description(null)
+                .value(450.0)
+                .quantityStock(10L)
+                .categoryId(1L)
+                .build();
+
+        mockMvcHelper.save(path,productRequest)
+                .andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages[0]").value("Description cannot be null!"));
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenInsertAProductAndValueIsNull() throws Exception {
+
+        ProductRequest productRequest = ProductRequest.builder()
+                .description("GTX 650 TI")
+                .value(null)
+                .quantityStock(10L)
+                .categoryId(1L)
+                .build();
+
+        mockMvcHelper.save(path,productRequest)
+                .andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages[0]").value("Value cannot be null!"));
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenInsertAProductAndQuantityStockIsNull() throws Exception {
+
+        ProductRequest productRequest = ProductRequest.builder()
+                .description("GTX 650 TI")
+                .value(500.0)
+                .quantityStock(null)
+                .categoryId(1L)
+                .build();
+
+        mockMvcHelper.save(path,productRequest)
+                .andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages[0]").value("Quantity stock cannot be null!"));
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenInsertAProductAndCategoryIsNull() throws Exception {
+
+        ProductRequest productRequest = ProductRequest.builder()
+                .description("GTX 650 TI")
+                .value(450.0)
+                .quantityStock(10L)
+                .categoryId(null)
+                .build();
+
+        mockMvcHelper.save(path,productRequest)
+                .andExpect(status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages[0]").value("Category cannot be null!"));
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenInsertAProductAndAllAttributesIsNull() throws Exception {
+
+        ProductRequest productRequest = ProductRequest.builder()
+                .description(null)
+                .value(null)
+                .quantityStock(null)
+                .categoryId(null)
+                .build();
+
+        mockMvcHelper.save(path,productRequest)
+                .andExpect(status().isBadRequest()); }
 
 
 }
