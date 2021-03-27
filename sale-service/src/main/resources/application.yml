@@ -1,26 +1,3 @@
-server:
-  port: 8082
 spring:
-  application:
-    name: sale_service
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-      dialect: org.hibernate.dialect.MySQL8Dialect
-  datasource:
-    url: jdbc:mysql://localhost:3306/sale_service?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC
-    username: root
-    password: password
-security:
-  jwt:
-    token:
-      secret-key: chave_microservices
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/registry/eureka
+    profiles:
+          active: prod
