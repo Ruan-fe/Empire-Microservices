@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 
 @Service
@@ -37,7 +36,9 @@ public class ProductService {
     }
 
     public Product change(ProductChangeRequest productChangeRequest) {
-        Product product = productChangeRequest.convert();
+
+        Category category = categoryRepository.findById(productChangeRequest.getCategoryId()).orElseThrow(()-> new RuntimeException());
+        Product product = productChangeRequest.convert(category);
         return  productRepository.save(product);
 
     }

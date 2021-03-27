@@ -17,9 +17,9 @@ public class ProductChangeRequest {
     private String description;
     private Double value;
     private Long quantityStock;
-    private Category category;
+    private Long categoryId;
 
-    public Product convert(){
+    public Product convert(Category category){
         return Product.builder().id(id).description(description).value(value).quantityStock(quantityStock).category(category).build();
     }
 }
