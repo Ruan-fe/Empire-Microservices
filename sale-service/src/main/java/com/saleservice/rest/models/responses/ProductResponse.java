@@ -1,6 +1,5 @@
 package com.saleservice.rest.models.responses;
 
-import com.saleservice.domain.entities.Category;
 import com.saleservice.domain.entities.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ public class ProductResponse {
     private String description;
     private Double value;
     private Long quantityStock;
-    private Category category;
+    private CategoryResponse category;
 
 
     public ProductResponse(Product product) {
@@ -23,7 +22,7 @@ public class ProductResponse {
         description = product.getDescription();
         value = product.getValue();
         quantityStock = product.getQuantityStock();
-        category = product.getCategory();
+        category = new CategoryResponse(product.getCategory());
     }
 
     public static Page<ProductResponse> convert(Page<Product> products) {
