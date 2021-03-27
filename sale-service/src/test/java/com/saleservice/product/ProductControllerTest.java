@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Sql(value = "classpath:scenarios/data.sql")
+@Sql(value = "classpath:scenarios/clean-all.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 public class ProductControllerTest {
 
@@ -37,13 +38,11 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].value").value(800))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].quantityStock").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].category.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].category.description").value("Placa de vídeo"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].description").value("GTX 750 TI"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].value").value(500))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].quantityStock").value(5))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].category.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].category.description").value("Placa de vídeo"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].category.id").value(1));
     }
 
     @Test
@@ -57,8 +56,7 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("GTX 650 TI"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.value").value(450))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.quantityStock").value(20))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.category.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.category.description").value("Placa de vídeo"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.category.id").value(1));
     }
 
 

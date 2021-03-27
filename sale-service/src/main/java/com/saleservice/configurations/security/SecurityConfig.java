@@ -5,6 +5,7 @@ import com.saleservice.configurations.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
+@Profile("prod")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
