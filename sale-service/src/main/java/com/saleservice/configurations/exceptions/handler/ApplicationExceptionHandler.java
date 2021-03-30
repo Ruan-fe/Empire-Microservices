@@ -1,5 +1,6 @@
 package com.saleservice.configurations.exceptions.handler;
 
+import com.saleservice.configurations.exceptions.ProductException;
 import com.saleservice.configurations.exceptions.ResourceNotFoundException;
 import com.saleservice.configurations.exceptions.models.StandardError;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,16 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
+        StandardError err =  StandardError.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(e.getMessage())
+                .timeStamp(System.currentTimeMillis())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(ProductException.class)
+    public ResponseEntity<StandardError> resourceNotFound(ProductException e, HttpServletRequest request){
         StandardError err =  StandardError.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(e.getMessage())

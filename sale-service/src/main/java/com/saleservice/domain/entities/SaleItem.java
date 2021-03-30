@@ -1,9 +1,6 @@
 package com.saleservice.domain.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,7 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class SaleProduct {
+@Builder
+public class SaleItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +20,5 @@ public class SaleProduct {
     @ManyToOne
     private Sale sale;
 
-    private Double quantityProductsSold;
+    private Long quantityProductsSold;
 }
