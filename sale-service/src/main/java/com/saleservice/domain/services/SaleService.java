@@ -106,7 +106,7 @@ public class SaleService {
             throw new ProductException("Quantity of " + product.getDescription() + " cannot be 0 or less than 0");
         }
 
-        if(stockProduct < 0 || stockProduct - quantityProduct < 0 ){
+        if(stockProduct <= 0 || stockProduct - quantityProduct < 0 ){
             throw new ProductException("Product " + product.getDescription() + " stock is insufficient, have just " + product.getQuantityStock() + " in stock!");
         }
     }
