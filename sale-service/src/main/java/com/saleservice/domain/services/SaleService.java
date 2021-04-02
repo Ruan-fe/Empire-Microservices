@@ -11,6 +11,7 @@ import com.saleservice.rest.models.requests.ProductSaleRequest;
 
 import com.saleservice.rest.models.requests.SaleItemRequest;
 import com.saleservice.rest.models.requests.SaleRequest;
+import com.saleservice.rest.models.responses.SaleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +33,19 @@ public class SaleService {
 
 
     @Transactional
-    public void makeSale(List<ProductSaleRequest> productSaleRequest) {
+    public SaleResponse makeSale(List<ProductSaleRequest> productSaleRequest) {
 
          Double totalValue = calculateTotalValueAndVerifyIfHaveInStock(productSaleRequest);
 
          Long saleId = insertInSale(totalValue);
 
          insertInSaleItemAndReduceStock(saleId, productSaleRequest);
+
+
+         SaleResponse saleResponse = SaleResponse.builder().total(totalValue).build();
+
+         return saleResponse;
+
 
     }
 

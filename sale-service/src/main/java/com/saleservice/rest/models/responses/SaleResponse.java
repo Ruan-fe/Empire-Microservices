@@ -2,10 +2,7 @@ package com.saleservice.rest.models.responses;
 
 import com.saleservice.domain.entities.Product;
 import com.saleservice.domain.entities.Sale;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class SaleResponse {
 
 
@@ -21,7 +19,7 @@ public class SaleResponse {
     private Double discount;
     private Double subTotal;
     private Double total;
-    private LocalDateTime dateSale;
+    private LocalDateTime dateSale = LocalDateTime.now();
 
 
 
@@ -32,7 +30,8 @@ public class SaleResponse {
         total = sale.getTotal();
     }
 
-    public static Page<SaleResponse> convert(Page<Sale> sales) {
-        return sales.map(SaleResponse::new);
+    @Override
+    public String toString() {
+        return "Successful purchase, total value: " + total;
     }
 }
