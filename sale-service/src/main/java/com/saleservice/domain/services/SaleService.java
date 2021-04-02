@@ -4,6 +4,8 @@ import com.saleservice.configurations.exceptions.ProductException;
 import com.saleservice.configurations.exceptions.ResourceNotFoundException;
 import com.saleservice.domain.entities.Product;
 import com.saleservice.domain.entities.Sale;
+import com.saleservice.domain.entities.User;
+import com.saleservice.domain.feignclients.UserFeignClient;
 import com.saleservice.domain.repositories.ProductRepository;
 import com.saleservice.domain.repositories.SaleItemRepository;
 import com.saleservice.domain.repositories.SaleRepository;
@@ -31,16 +33,21 @@ public class SaleService {
     @Autowired
     private SaleItemRepository saleItemRepository;
 
+    @Autowired
+    private UserFeignClient userFeignClient;
 
     @Transactional
-    public SaleResponse makeSale(List<ProductSaleRequest> productSaleRequest) {
+    public SaleResponse makeSale(List<ProductSaleRequest> productSaleRequest, String bearerToken) {
+
+         User user = userFeignClient.getAuthenticated(bearerToken);
+
+         Long userId = user.getId();
 
          Double totalValue = calculateTotalValueAndVerifyIfHaveInStock(productSaleRequest);
 
-         Long saleId = insertInSale(totalValue);
+         Long saleId = insertInSale(totalValue, userId);
 
          insertInSaleItemAndReduceStock(saleId, productSaleRequest);
-
 
          SaleResponse saleResponse = SaleResponse.builder().total(totalValue).build();
 
@@ -71,8 +78,8 @@ public class SaleService {
         return totalValue;
     }
 
-    private Long insertInSale(Double totalValue) {
-        SaleRequest saleRequest = SaleRequest.builder().discount(0.0).subTotal(totalValue).total(totalValue).build();
+    private Long insertInSale(Double totalValue, Long userId) {
+        SaleRequest saleRequest = SaleRequest.builder().userId(userId).discount(0.0).subTotal(totalValue).total(totalValue).build();
         Sale sale = saleRepository.save(saleRequest.convert());
         Long saleId = sale.getId();
         return saleId;

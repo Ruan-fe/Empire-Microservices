@@ -6,6 +6,7 @@ import com.empire.authentication.domain.repositories.PermissionRepository;
 import com.empire.authentication.domain.repositories.UserRepository;
 import com.empire.authentication.rest.models.requests.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,4 +44,14 @@ public class UserService implements UserDetailsService {
         User user = userRequest.convert(permissionRepository);
         return userRepository.save(user);
     }
+
+   public User getAuthenticated() {
+        try {
+            return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        catch (Exception e) {
+           return null;
+        }
+    }
+
 }

@@ -13,12 +13,13 @@ import java.time.LocalDateTime;
 public class SaleRequest {
 
 
+    private Long userId;
     private Double discount;
     private Double subTotal;
     private Double total;
 
 
     public Sale convert(){
-        return Sale.builder().discount(discount).subTotal(subTotal).total(total).dateSale(LocalDateTime.now()).build();
+        return Sale.builder().userId(userId).discount(discount).subTotal(subTotal).total(total).dateSale(LocalDateTime.now()).build();
     }
 }

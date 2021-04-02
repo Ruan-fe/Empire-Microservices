@@ -16,10 +16,14 @@ public class SaleController {
     @Autowired
     private SaleService saleService;
 
-    @PostMapping
-    public ResponseEntity<?> makeSale(@RequestBody List<ProductSaleRequest> productSaleRequest){
 
-        SaleResponse saleResponse = saleService.makeSale(productSaleRequest);
+    @PostMapping
+    public ResponseEntity<?> makeSale(@RequestBody List<ProductSaleRequest> productSaleRequest, @RequestHeader(value = "Authorization") String bearerToken){
+
+
+        SaleResponse saleResponse = saleService.makeSale(productSaleRequest, bearerToken);
+
+
 
         return ResponseEntity.ok(saleResponse.toString());
     }

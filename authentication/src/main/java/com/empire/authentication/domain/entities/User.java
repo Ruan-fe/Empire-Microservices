@@ -33,17 +33,17 @@ public class User implements UserDetails, Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "isAccountNonExpired")
-    private Boolean isAccountNonExpired;
+    @Column(name = "accountNonExpired")
+    private Boolean accountNonExpired;
 
-    @Column(name = "isAccountNonLocked")
-    private Boolean isAccountNonLocked;
+    @Column(name = "accountNonLocked")
+    private Boolean accountNonLocked;
 
-    @Column(name = "isCredentialsNonExpired")
-    private Boolean isCredentialsNonExpired;
+    @Column(name = "credentialsNonExpired")
+    private Boolean credentialsNonExpired;
 
-    @Column(name = "isEnabled")
-    private Boolean isEnabled;
+    @Column(name = "enabled")
+    private Boolean enabled;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -71,21 +71,21 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.isAccountNonExpired;
+        return this.accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.isAccountNonLocked;
+        return this.accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.isCredentialsNonExpired;
+        return this.credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return this.isEnabled;
+        return this.enabled;
     }
 }

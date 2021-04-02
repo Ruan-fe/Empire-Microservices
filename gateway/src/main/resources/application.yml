@@ -18,7 +18,7 @@ zuul:
   routes:
     authentication_service:
       path: /auth/**
-      service-id: authentication_service
+      service-id: authentication-service
       strip-prefix: false
       custom-sensitive-headers: true
     sale_service:

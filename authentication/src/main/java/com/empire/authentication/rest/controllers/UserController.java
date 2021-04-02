@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -29,6 +30,14 @@ public class UserController {
         URI uri = uriBuilder.path(pathWithId).buildAndExpand(user.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new UserResponse(user));
+    }
+
+    @GetMapping
+    public User getAuthenticated(@RequestHeader("Authorization") String bearerToken, HttpServletResponse httpServletResponse){
+
+        httpServletResponse.setHeader("Authorization",bearerToken);
+
+        return userService.getAuthenticated();
     }
 
 

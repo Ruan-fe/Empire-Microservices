@@ -17,6 +17,7 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long userId;
     private Double discount;
     private Double subTotal;
     private Double total;

@@ -28,9 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/auth/user"
     };
 
-    private static final String[] PUBLIC_MATCHERS_GET = {
-    };
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -50,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .anyRequest().authenticated()
                 .and()

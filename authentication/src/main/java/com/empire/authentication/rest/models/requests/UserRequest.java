@@ -35,10 +35,10 @@ public class UserRequest implements Serializable {
         return User.builder()
                 .username(username)
                 .password(bCryptPasswordEncoder.encode(password))
-                .isAccountNonExpired(true)
-                .isAccountNonLocked(true)
-                .isCredentialsNonExpired(true)
-                .isEnabled(true)
+                .accountNonExpired(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
+                .enabled(true)
                 .permissions(Arrays.asList(permission))
                 .build();
     }
