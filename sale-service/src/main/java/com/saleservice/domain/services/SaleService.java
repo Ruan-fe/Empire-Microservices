@@ -2,6 +2,7 @@ package com.saleservice.domain.services;
 
 import com.saleservice.configurations.exceptions.ProductException;
 import com.saleservice.configurations.exceptions.ResourceNotFoundException;
+import com.saleservice.configurations.exceptions.SaleException;
 import com.saleservice.domain.entities.Product;
 import com.saleservice.domain.entities.Sale;
 import com.saleservice.domain.entities.User;
@@ -39,9 +40,8 @@ public class SaleService {
     @Transactional
     public SaleResponse makeSale(List<ProductSaleRequest> productSaleRequest, String bearerToken) {
 
-         User user = userFeignClient.getAuthenticated(bearerToken);
 
-         Long userId = user.getId();
+         Long userId = searchAuthenticatedUser(bearerToken);
 
          Double totalValue = calculateTotalValueAndVerifyIfHaveInStock(productSaleRequest);
 
@@ -56,6 +56,21 @@ public class SaleService {
 
     }
 
+    private Long searchAuthenticatedUser(String bearerToken) {
+
+        Long userId = null;
+
+        try {
+            User user = userFeignClient.getAuthenticated(bearerToken);
+            userId = user.getId();
+        }
+        catch (Exception e){
+            throw new SaleException(e.getMessage());
+        }
+
+        return userId;
+
+    }
 
 
     private Double calculateTotalValueAndVerifyIfHaveInStock(List<ProductSaleRequest> productSaleRequest) {

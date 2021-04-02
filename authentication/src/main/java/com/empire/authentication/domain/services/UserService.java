@@ -1,5 +1,6 @@
 package com.empire.authentication.domain.services;
 
+import com.empire.authentication.configurations.exceptions.UserAuthException;
 import com.empire.authentication.configurations.exceptions.UsernameAlreadyExistException;
 import com.empire.authentication.domain.entities.User;
 import com.empire.authentication.domain.repositories.PermissionRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -50,7 +52,7 @@ public class UserService implements UserDetailsService {
             return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         }
         catch (Exception e) {
-           return null;
+           throw new UserAuthException(e.getMessage());
         }
     }
 
